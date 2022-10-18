@@ -14,7 +14,7 @@
                             <h2>{{$post->title}}</h2>
                             <ul class="blog-info-link mt-3 mb-4">
                                 <li><a href="#"><i class="far fa-user"></i> {{$post->category->name}}</a></li>
-                                <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>
+                                <li><a href="#"><i class="far fa-comments"></i> {{count($comments)}} Comments</a></li>
                             </ul>
                             <p class="excert">{{$post->excerpt}}</p>
                             <p>{{$post->body}}</p>
@@ -73,20 +73,24 @@
                         </div>
                     </div>
                     <div class="comments-area">
-                        <h4>05 Comments</h4>
-                        <x-comment-list></x-comment-list>
-                        <x-comment-list></x-comment-list>
-                        <x-comment-list></x-comment-list>
+                        <h4>{{count($comments)}} Comments</h4>
+                        @if (count($comments))
+                            @foreach ($comments as $comment )
+                                <x-comment-list :comment="$comment"></x-comment-list>
+                            @endforeach
+                        @endif
                     </div>
                     <div class="comment-form">
-                        <h4>Leave a Reply</h4>
-                        <form class="form-contact comment_form" action="#" id="commentForm">
+                        <h4>Post a comment here...</h4>
+                        <form class="form-contact comment_form" method="POST" action="{{route('post.comment', $post)}}" id="commentForm">
+                            @csrf
                             <div class="row">
+                                <input type="hidden" name="post_id" value="{{$post->id}}">
                                 <div class="col-12">
                                     <x-form.textarea name="comment"/>
                                 </div>
                                 <div class="col-md-6">
-                                    <x-form.input name="name" type="text"/>
+                                    <x-form.input name="username"/>
                                 </div>
                                 <div class="col-md-6">
                                     <x-form.input name="email" type="email"/>

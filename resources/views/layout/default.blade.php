@@ -14,7 +14,9 @@
 </head>
 
 <body>
-    
+    @if (session()->has('status'))
+        <p>{{session('status')}}</p>
+    @endif
     @include('includes.header')
         @yield('content')
     @include('includes.footer')

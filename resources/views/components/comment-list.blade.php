@@ -1,3 +1,4 @@
+@props(['comment'])
 <div class="comment-list">
     <div class="single-comment justify-content-between d-flex">
         <div class="user justify-content-between d-flex">
@@ -5,22 +6,17 @@
                 <img src="/img/comment/comment_1.png" alt="">
             </div>
             <div class="desc">
-                <p class="comment">
-                    Multiply sea night grass fourth day sea lesser rule open subdue female fill
-                    which them
-                    Blessed, give fill lesser bearing multiply sea night grass fourth day sea
-                    lesser
-                </p>
+                <p class="comment">{{$comment->comment}}</p>
                 <div class="d-flex justify-content-between">
                     <div class="d-flex align-items-center">
                         <h5>
-                            <a href="#">Emilly Blunt</a>
+                            <a href="#">{{$comment->username}}</a>
                         </h5>
-                        <p class="date">December 4, 2017 at 3:12 pm </p>
+                        <p class="date">{{$comment->created_at}} </p>
                     </div>
-                    <div class="reply-btn">
+                    {{-- <div class="reply-btn">
                         <a href="#" class="btn-reply text-uppercase">reply</a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

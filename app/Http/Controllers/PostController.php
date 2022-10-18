@@ -10,7 +10,8 @@ class PostController extends Controller
     public function getSinglePost(Post $post)
     {
         return view('single-post',[
-            'post' => $post
+            'post' => $post,
+            'comments' => $post->comments
         ]);
     }
 }
