@@ -9,7 +9,7 @@
                             <a href="category.html">
                                 <h5>{{$bannerPosts[0]->category->name}}</h5>
                             </a>
-                            <a href="single-blog.html">
+                            <a href="{{route('single.post', $bannerPosts[0]->slug)}}">
                                 <h2>{{$bannerPosts[0]->title}}</h2>
                             </a>
                             <p><span> By {{$bannerPosts[0]->author->name}}</span> / {{$bannerPosts[0]->created_at->format('F') . " " . $bannerPosts[0]->created_at->format('d') . ", " . $bannerPosts[0]->created_at->format('Y')}}</p>
@@ -20,7 +20,7 @@
                             <a href="category.html">
                                 <h5>{{$bannerPosts[1]->category->name}}</h5>
                             </a>
-                            <a href="single-blog.html">
+                            <a href="{{route('single.post', $bannerPosts[1]->slug)}}">
                                 <h2>{{$bannerPosts[1]->title}}</h2>
                             </a>
                             <p><span> By {{$bannerPosts[1]->author->name}}</span> / {{$bannerPosts[1]->created_at->format('F') . " " . $bannerPosts[1]->created_at->format('d') . ", " . $bannerPosts[1]->created_at->format('Y')}}</p>

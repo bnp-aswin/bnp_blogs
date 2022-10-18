@@ -6,7 +6,7 @@
     </div>
     <div class="post_text_1 media-body align-self-center">
         <p><span> By {{$post->author->name}}</span> / {{$post->created_at->format('F') . " " . $post->created_at->format('d') . ", " . $post->created_at->format('Y')}}</p>
-        <a href="#">
+        <a href="{{route('single.post', $post)}}">
             <h3>{{$post->title}}</h3>
         </a>
         <div class="post_icon">
