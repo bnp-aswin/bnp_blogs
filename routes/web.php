@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +24,14 @@ Route::get('/single-post/{post:slug}', [PostController::class, 'getSinglePost'])
 
 Route::post('/single-post/{post:slug}', [CommentController::class, 'store'])->name('post.comment');
 
+Route::get('/register', [AuthController::class, 'getRegister'])->name('register');
+
+Route::post('/register', [AuthController::class, 'postRegister'])->name('post.register');
+
+Route::get('/login', [AuthController::class, 'getLogin'])->name('login');
+
+Route::post('/login', [AuthController::class, 'postLogin'])->name('post.login');;
+
+Route::post('/logout', [AuthController::class, 'postLogout'])->name('logout');
+
+Route::get('/user/dashboard', [UserController::class, 'getDashboard'])->name('dashboard');

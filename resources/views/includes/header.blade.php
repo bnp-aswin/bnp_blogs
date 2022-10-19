@@ -3,7 +3,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="#"> <img src="img/logo.png" alt="logo"> </a>
+                        <a class="navbar-brand" href="{{route('home')}}"> <img src="/img/logo.png" alt="logo"> </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -13,17 +13,30 @@
                             id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="#">Home</a>
+                                    <a class="nav-link" href="{{route('home')}}">Home</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="archive.html">Archive</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="category.html"> Category</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="contact.html">Contact</a>
-                                </li>
+                                @guest
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('login')}}">Login</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('register')}}"> Register</a>
+                                    </li>
+                                @endguest
+                                @auth
+                                    <form id="logout_form" action="{{route('logout')}}" method="POST">
+                                        @csrf
+                                        <li class="nav-item">
+                                            <a class="nav-link" onclick="logout()" href="#">Logout</a>
+                                        </li>
+                                    </form>
+                                    {{-- <li class="nav-item">
+                                        <a class="nav-link" href="#"> Add post</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#"> View post</a>
+                                    </li> --}}
+                                @endauth
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
