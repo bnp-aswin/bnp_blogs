@@ -30,12 +30,12 @@
                                             <a class="nav-link" onclick="logout()" href="#">Logout</a>
                                         </li>
                                     </form>
-                                    {{-- <li class="nav-item">
-                                        <a class="nav-link" href="#"> Add post</a>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('create.post')}}"> Add post</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#"> View post</a>
-                                    </li> --}}
+                                        <a class="nav-link" href="{{route('user.posts')}}"> View post</a>
+                                    </li>
                                 @endauth
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"

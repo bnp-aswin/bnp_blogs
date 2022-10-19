@@ -35,3 +35,10 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('post.login');
 Route::post('/logout', [AuthController::class, 'postLogout'])->name('logout');
 
 Route::get('/user/dashboard', [UserController::class, 'getDashboard'])->name('dashboard');
+
+Route::get('/post/create', [PostController::class, 'getAddNewPost'])->name('create.post');
+
+Route::post('/post/create', [PostController::class, 'postAddNewPost'])->name('store.post');
+
+Route::get('/user/posts', [PostController::class, 'getAllPosts'])->name('user.posts');
+

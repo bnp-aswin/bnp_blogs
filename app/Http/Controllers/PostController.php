@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -12,6 +14,43 @@ class PostController extends Controller
         return view('single-post',[
             'post' => $post,
             'comments' => $post->comments
+        ]);
+    }
+
+    public function getAddNewPost()
+    {
+        return view('user.add-post',[
+            'categories' => Category::all()
+        ]);
+    }
+
+    public function postAddNewPost(Request $request)
+    {
+        $post = $request->validate([
+            'user_id' => ['required'],
+            'category' => ['required'],
+            'title' => ['required'],
+            'excerpt' => ['required'],
+            'body' => ['required'],
+            'thumbnail' => ['required']
+        ]);
+        // dd($post['thumbnail']->file('thumbnail'));
+        Post::create([
+            'user_id' => $post['user_id'],
+            'category_id' => $post['category'],
+            'title' => $post['title'],
+            'slug' => Str::slug($post['title']),
+            'excerpt' => $post['excerpt'],
+            'body' => $post['body'],
+            'thumbnail' => $request->file('thumbnail')->store('thumbnails')
+        ]);
+        return redirect()->route('user.posts')->with('status', 'New Post created');
+    }
+
+    public function getAllPosts()
+    {
+        return view('user.view-posts', [
+            'posts' => Post::where('user_id', auth()->user()->id)->get()
         ]);
     }
 }
