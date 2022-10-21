@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <h1>Add New Post</h1>
-                <form action="{{route('store.post')}}" enctype="multipart/form-data" method="POST">
+                <form action="{{route('post.store')}}" enctype="multipart/form-data" method="POST">
                     @csrf
                     <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
                     <x-form.select name="category">

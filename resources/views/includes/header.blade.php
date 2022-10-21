@@ -31,10 +31,10 @@
                                         </li>
                                     </form>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{route('create.post')}}"> Add post</a>
+                                        <a class="nav-link" href="{{route('post.create')}}"> Add post</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{route('user.posts')}}"> View post</a>
+                                        <a class="nav-link" href="{{route('posts.show')}}"> View post</a>
                                     </li>
                                 @endauth
                                 <li class="nav-item dropdown">

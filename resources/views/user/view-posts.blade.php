@@ -30,12 +30,12 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="{{route('edit.post', $post)}}">
+                                    <a href="{{route('post.edit', $post)}}">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="{{route('delete.post', $post)}}">
+                                    <a href="{{route('post.delete', $post)}}">
                                         <i class="fa-solid fa-trash"></i>
                                     </a>
                                 </td>

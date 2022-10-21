@@ -22,30 +22,30 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/single-post/{post:slug}', [PostController::class, 'getSinglePost'])->name('single.post');
 
-Route::post('/single-post/{post:slug}', [CommentController::class, 'store'])->name('post.comment');
+Route::post('/single-post/{post:slug}', [CommentController::class, 'setComment'])->name('comment.store');
 
 Route::get('/register', [AuthController::class, 'getRegister'])->name('register');
 
-Route::post('/register', [AuthController::class, 'postRegister'])->name('post.register');
+Route::post('/register', [AuthController::class, 'setRegister'])->name('user.store');
 
 Route::get('/login', [AuthController::class, 'getLogin'])->name('login');
 
-Route::post('/login', [AuthController::class, 'postLogin'])->name('post.login');;
+Route::post('/login', [AuthController::class, 'setLogin'])->name('user.auth');;
 
-Route::post('/logout', [AuthController::class, 'postLogout'])->name('logout');
+Route::post('/logout', [AuthController::class, 'setLogout'])->name('logout');
 
 Route::get('/user/dashboard', [UserController::class, 'getDashboard'])->name('dashboard');
 
-Route::get('/post/create', [PostController::class, 'getAddNewPost'])->name('create.post');
+Route::get('/post/create', [PostController::class, 'getAddPost'])->name('post.create');
 
-Route::post('/post/create', [PostController::class, 'postAddNewPost'])->name('store.post');
+Route::post('/post/create', [PostController::class, 'setAddPost'])->name('post.store');
 
-Route::get('/user/posts', [PostController::class, 'getAllPosts'])->name('user.posts');
+Route::get('/user/posts', [PostController::class, 'getPosts'])->name('posts.show');
 
-Route::get('/post/delete/{post:slug}', [PostController::class, 'deletePost'])->name('delete.post');
+Route::get('/post/delete/{post:slug}', [PostController::class, 'deletePost'])->name('post.delete');
 
-Route::get('post/edit/{post:slug}',[PostController::class, 'getEditPost'])->name('edit.post');
+Route::get('post/edit/{post:slug}',[PostController::class, 'getEditPost'])->name('post.edit');
 
-Route::post('post/edit/{post:slug}', [PostController::class, 'setEditPost'])->name('update.post');
+Route::post('post/edit/{post:slug}', [PostController::class, 'setEditPost'])->name('post.update');
 
 

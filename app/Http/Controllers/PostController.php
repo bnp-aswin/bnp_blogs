@@ -18,14 +18,14 @@ class PostController extends Controller
         ]);
     }
 
-    public function getAddNewPost()
+    public function getAddPost()
     {
         return view('user.add-post',[
             'categories' => Category::all()
         ]);
     }
 
-    public function postAddNewPost(Request $request)
+    public function setAddPost(Request $request)
     {
         $post = $request->validate([
             'user_id' => ['required'],
@@ -45,10 +45,10 @@ class PostController extends Controller
             'body' => $post['body'],
             'thumbnail' => $request->file('thumbnail')->store('thumbnails')
         ]);
-        return redirect()->route('user.posts')->with('status', 'New Post created');
+        return redirect()->route('posts.show')->with('status', 'New Post created');
     }
 
-    public function getAllPosts()
+    public function getPosts()
     {
         return view('user.view-posts', [
             'posts' => Post::where('user_id', auth()->user()->id)->get()
@@ -86,7 +86,7 @@ class PostController extends Controller
             'slug' => Str::slug($data['title']),
             'thumbnail' => $newImgPath
         ]);
-        return redirect()->route('user.posts')->with('status', 'Post Updated successfully');
+        return redirect()->route('posts.show')->with('status', 'Post Updated successfully');
         
     }
 

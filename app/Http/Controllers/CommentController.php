@@ -9,7 +9,7 @@ use Illuminate\Validation\Rule;
 class CommentController extends Controller
 {
     //
-    public function store(Request $request)
+    public function setComment(Request $request)
     {
         $comment = $request->validate([
             'post_id' => ['required'],

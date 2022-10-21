@@ -13,7 +13,7 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function postLogin(Request $request)
+    public function setLogin(Request $request)
     {
         $user = $request->validate([
             'email' => ['required','email:rfc,dns'],
@@ -28,7 +28,7 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
-    public function postRegister(Request $request)
+    public function setRegister(Request $request)
     {
         $user = $request->validate([
             'name' => ['required'],
@@ -45,7 +45,7 @@ class AuthController extends Controller
         return view('user.dashboard');
     }
 
-    public function postLogout()
+    public function setLogout()
     {
         auth()->logout();
         return redirect()->route('home')->with('status', 'Logout Successfull');
