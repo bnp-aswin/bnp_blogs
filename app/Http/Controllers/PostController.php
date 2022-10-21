@@ -89,4 +89,13 @@ class PostController extends Controller
         return redirect()->route('user.posts')->with('status', 'Post Updated successfully');
         
     }
+
+    public function deletePost(Post $post)
+    {
+        $post->comments()->delete();
+        $currentPostImg = $post->thumbnail;
+        Storage::delete($currentPostImg);
+        $post->delete();
+        return redirect()->back()->with('status', 'Post deleted successfully');
+    }
 }
