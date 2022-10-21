@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CommentController extends Controller
 {
@@ -13,10 +14,20 @@ class CommentController extends Controller
         $comment = $request->validate([
             'post_id' => ['required'],
             'comment' => ['required'],
-            'username' => ['required'],
-            'email' => ['required', 'email:rfc,dns']
+            'username' => Rule::requiredIf(!auth()->check()),
+            'email' => Rule::requiredIf(!auth()->check())
         ]);
-        Comment::create($comment);
+        if (auth()->check()) {
+            Comment::create([
+                'post_id' => $comment['post_id'],
+                'comment' => $comment['comment'],
+                'username' => auth()->user()->name,
+                'email' => auth()->user()->email
+            ]);
+        }else{
+            Comment::create($comment);
+        }
+        
         return redirect()->back()->with('status', 'Comment Posted successfuly');
     }
 }

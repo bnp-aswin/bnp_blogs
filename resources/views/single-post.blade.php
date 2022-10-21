@@ -89,12 +89,14 @@
                                 <div class="col-12">
                                     <x-form.textarea name="comment"/>
                                 </div>
-                                <div class="col-md-6">
-                                    <x-form.input name="username"/>
-                                </div>
-                                <div class="col-md-6">
-                                    <x-form.input name="email" type="email"/>
-                                </div>
+                                @guest
+                                    <div class="col-md-6">
+                                        <x-form.input name="username"/>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <x-form.input name="email" type="email"/>
+                                    </div>
+                                @endguest
                             </div>
                             <div class="row">
                                 <div class="col-12">
@@ -104,9 +106,11 @@
                         </form>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <x-side-widget></x-side-widget>
-                </div>
+                @guest
+                    <div class="col-lg-4">
+                        <x-side-widget></x-side-widget>
+                    </div>
+                @endguest
             </div>
         </div>
     </section>
