@@ -12,6 +12,7 @@ class PostController extends Controller
 {
     public function getSinglePost(Post $post)
     {
+        $post->increment('views');
         return view('single-post',[
             'post' => $post,
             'comments' => $post->comments

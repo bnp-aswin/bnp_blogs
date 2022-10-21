@@ -8,7 +8,7 @@
                 <div class="col-lg-8 posts-list">
                     <div class="single-post">
                         <div class="feature-img">
-                            <img class="img-fluid" width="730px" src="{{$post->thumbnail}}" alt="">
+                            <img class="img-fluid" width="730px" src="/storage/{{$post->thumbnail}}" alt="">
                         </div>
                         <div class="blog_details">
                             <h2>{{$post->title}}</h2>
@@ -48,17 +48,17 @@
                     </div>
                     <div class="navigation-top">
                         <div class="d-sm-flex justify-content-between text-center">
-                            <p class="like-info"><span class="align-middle"><i class="far fa-heart"></i></span> Lily and
-                                4
-                                people like this</p>
+                            <p class="like-info"><span class="align-middle"><i class="fa-solid fa-eye"></i></span>
+                                {{$post->views}}
+                                people viewed this</p>
                             <div class="col-sm-4 text-center my-2 my-sm-0">
                             </div>
-                            <ul class="social-icons">
+                            {{-- <ul class="social-icons">
                                 <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                                 <li><a href="#"><i class="fab fa-twitter"></i></a></li>
                                 <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
                                 <li><a href="#"><i class="fab fa-behance"></i></a></li>
-                            </ul>
+                            </ul> --}}
                         </div>
                     </div>
                     <div class="blog-author">

@@ -8,7 +8,7 @@
                 <input type="text" class="form-control" placeholder='Search Keyword'
                     onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'">
                 <div class="input-group-append">
-                    <button class="btn" type="button"><i class="ti-search"></i></button>
+                    <button class="btn" type="button"><i class="fa-brands fa-searchengin"></i></button>
                 </div>
             </div>
         </div>
@@ -18,7 +18,7 @@
     </div>
     <div class="single_catagory_post post_2 single_border_bottom">
         <div class="category_post_img">
-            <img src="img/sidebar/sidebar_1.png" alt="">
+            <img src="/img/sidebar/sidebar_1.png" alt="">
         </div>
         <div class="post_text_1 pr_30">
             <p><span> By Michal</span> / March 30 , 2019</p>
@@ -30,7 +30,7 @@
     </div>
     <div class="single_catagory_post post_2 single_border_bottom">
         <div class="category_post_img">
-            <img src="img/sidebar/sidebar_2.png" alt="">
+            <img src="/img/sidebar/sidebar_2.png" alt="">
         </div>
         <div class="post_text_1 pr_30">
             <p><span> By Michal</span> / March 30 , 2019</p>
@@ -42,7 +42,7 @@
     </div>
     <div class="single_catagory_post post_2">
         <div class="category_post_img">
-            <img src="img/sidebar/sidebar_3.png" alt="">
+            <img src="/img/sidebar/sidebar_3.png" alt="">
         </div>
         <div class="post_text_1 pr_30">
             <p><span> By Michal</span> / March 30 , 2019</p>
