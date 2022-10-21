@@ -22,9 +22,9 @@
                                 <th scope="row">{{$loop->iteration}}</th>
                                 <td>{{$post->title}}</td>
                                 <td>{{$post->created_at}}</td>
-                                <td><a href="/edit-post/{{$post->slug}}"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                                <td><a href="{{route('edit.post', $post)}}"><i class="fa-solid fa-pen-to-square"></i></a></td>
                                 <td>
-                                    <a  data-toggle="modal" data-target="#viewSinglePost">
+                                    <a href="{{route('single.post', $post)}}">
                                         <i class="fa-solid fa-eye"></i>
                                     </a>
                                 </td>
@@ -34,11 +34,11 @@
                         @empty($posts)
                             <tr>no post</tr>
                         @endempty
-
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+    
 
 @endsection

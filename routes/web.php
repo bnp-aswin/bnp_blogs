@@ -42,3 +42,8 @@ Route::post('/post/create', [PostController::class, 'postAddNewPost'])->name('st
 
 Route::get('/user/posts', [PostController::class, 'getAllPosts'])->name('user.posts');
 
+Route::get('post/edit/{post:slug}',[PostController::class, 'getEditPost'])->name('edit.post');
+
+Route::post('post/edit/{post:slug}', [PostController::class, 'setEditPost'])->name('update.post');
+
+
