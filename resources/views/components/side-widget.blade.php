@@ -2,13 +2,14 @@
     <div class="sidebar_tittle">
         <h3>Search Objects</h3>
     </div>
-    <form action="#">
+    <form action="{{route('search')}}" method="POST">
+        @csrf
         <div class="form-group">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder='Search Keyword'
+                <input type="text" name="search" class="form-control" placeholder='Search Keyword'
                     onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'">
                 <div class="input-group-append">
-                    <button class="btn" type="button"><i class="fa-brands fa-searchengin"></i></button>
+                    <button class="btn" type="submit"><i class="fa-brands fa-searchengin"></i></button>
                 </div>
             </div>
         </div>

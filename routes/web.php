@@ -52,3 +52,4 @@ Route::get('category/{category:name}', [PostController::class, 'getByCategory'])
 
 Route::get('author/{author:username}', [PostController::class, 'getByAuthor'])->name('author.posts');
 
+Route::post('search', [PostController::class, 'getSearch'])->name('search');

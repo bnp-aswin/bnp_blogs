@@ -116,4 +116,17 @@ class PostController extends Controller
             'title' => 'Author ' . "$author->name"
         ]);
     }
+
+    public function getSearch()
+    {
+        $search = request('search');
+        $posts = Post::where('title', 'Like', "%{$search}%")
+            ->orWhere('body', 'Like', "%{$search}%")
+            ->get();
+        
+        return view('posts', [
+            'posts' => $posts,
+            'title' => 'Search result'
+        ]);
+    }
 }
