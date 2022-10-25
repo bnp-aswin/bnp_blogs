@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class AuthController extends Controller
 {
@@ -16,8 +17,8 @@ class AuthController extends Controller
     public function setLogin(Request $request)
     {
         $user = $request->validate([
-            'email' => ['required','email:rfc,dns'],
-            'password' => ['required','min:6','max:256']
+            'email' => ['bail', 'required','email:rfc,dns', Rule::exists('users','email')],
+            'password' => ['bail', 'required','min:6','max:255']
         ]);
         auth()->attempt($user);
         return redirect()->route('dashboard')->with('status', 'Login successfull');
@@ -31,10 +32,10 @@ class AuthController extends Controller
     public function setRegister(Request $request)
     {
         $user = $request->validate([
-            'name' => ['required'],
-            'username' => ['required'],
-            'email' => ['required', 'email:rfc,dns'],
-            'password' => ['required', 'confirmed', 'min:6', 'max:256']
+            'name' => ['bail', 'required', 'min:3', 'max:255'],
+            'username' => ['bail', 'required', Rule::unique('users', 'username')],
+            'email' => ['bail', 'required', 'email:rfc,dns', Rule::unique('users', 'email')],
+            'password' => ['bail', 'required', 'confirmed', 'min:6', 'max:255']
         ]);
         User::create($user);
         return redirect()->route('login')->with('status', 'User register successfully');

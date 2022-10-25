@@ -8,6 +8,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class PostController extends Controller
 {
@@ -30,12 +31,17 @@ class PostController extends Controller
     public function setAddPost(Request $request)
     {
         $post = $request->validate([
-            'user_id' => ['required'],
-            'category' => ['required'],
-            'title' => ['required'],
-            'excerpt' => ['required'],
+            'user_id' => ['required',Rule::exists('users', 'id')],
+            'category' => ['required', Rule::exists('categories', 'id')],
+            'title' => ['required', Rule::unique('posts', 'title')],
+            'excerpt' => ['required','min:100', 'max:512'],
             'body' => ['required'],
-            'thumbnail' => ['required']
+            'thumbnail' => 'bail|required|file|max:2048|mimes:png'
+        ],
+        [
+            'thumbnail.file' => "The thumbnail must be a file of type: png.",
+            'thumbnail.max' => 'The thumbnail size must be below 2048kb',
+            'thumbnail.mimes' => "The thumbnail must be a file of type: png.",
         ]);
         // dd($post['thumbnail']->file('thumbnail'));
         Post::create([
@@ -68,9 +74,9 @@ class PostController extends Controller
     public function setEditPost(Post $post, Request $request)
     {
         $data = $request->validate([
-            'category' => ['required'],
-            'title' => ['required'],
-            'excerpt' => ['required'],
+            'category' => ['required', Rule::exists('categories', 'id')],
+            'title' => ['required', Rule::unique('posts', 'title')],
+            'excerpt' => ['required','min:100', 'max:512'],
             'body' => ['required'],
         ]);
         $oldImgPath = $post->thumbnail;
