@@ -48,4 +48,7 @@ Route::get('post/edit/{post:slug}',[PostController::class, 'getEditPost'])->name
 
 Route::post('post/edit/{post:slug}', [PostController::class, 'setEditPost'])->name('post.update');
 
+Route::get('category/{category:name}', [PostController::class, 'getByCategory'])->name('category.posts');
+
+Route::get('author/{author:username}', [PostController::class, 'getByAuthor'])->name('author.posts');
 

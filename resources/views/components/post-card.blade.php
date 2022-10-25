@@ -2,7 +2,7 @@
 <div class="single_post media post_3">
     <div class="single_post_img">
         <img src="storage/{{$post->thumbnail}}" style="max-width: 350px" alt="">
-        <a href="category.html" class="category_btn">{{$post->category->name}}</a>
+        <a href="{{route('category.posts', $post->category->name )}}" class="category_btn">{{$post->category->name}}</a>
     </div>
     <div class="post_text_1 media-body align-self-center">
         <p><span> By {{$post->author->name}}</span> / {{$post->created_at->format('F') . " " . $post->created_at->format('d') . ", " . $post->created_at->format('Y')}}</p>

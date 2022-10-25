@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -98,5 +99,21 @@ class PostController extends Controller
         Storage::delete($currentPostImg);
         $post->delete();
         return redirect()->back()->with('status', 'Post deleted successfully');
+    }
+
+    public function getByCategory(Category $category)
+    {
+        return view('posts', [
+            'posts' => $category->posts()->get(),
+            'title' => "$category->name " .'Category'
+        ]);
+    }
+
+    public function getByAuthor(User $author)
+    {
+        return view('posts', [
+            'posts' => $author->posts()->get(),
+            'title' => 'Author ' . "$author->name"
+        ]);
     }
 }

@@ -13,7 +13,7 @@
                         <div class="blog_details">
                             <h2>{{$post->title}}</h2>
                             <ul class="blog-info-link mt-3 mb-4">
-                                <li><a href="#"><i class="far fa-user"></i> {{$post->category->name}}</a></li>
+                                <li><a href="{{route('category.posts', $post->category->name )}}"><i class="far fa-user"></i> {{$post->category->name}}</a></li>
                                 <li><a href="#"><i class="far fa-comments"></i> {{count($comments)}} Comments</a></li>
                             </ul>
                             <p class="excert">{{$post->excerpt}}</p>
@@ -65,7 +65,7 @@
                         <div class="media align-items-center">
                             <img src="/img/blog/author.png" alt="">
                             <div class="media-body">
-                                <a href="#">
+                                <a href="{{route('author.posts', $post->author->username )}}">
                                     <h4>{{$post->author->name}}</h4>
                                 </a>
                                 <p>{{$post->author->bio}}</p>

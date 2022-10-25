@@ -6,7 +6,7 @@
                 <div class="col-lg-12">
                     <div class="banner_post_1 banner_post_bg_1">
                         <div class="banner_post_iner text-center">
-                            <a href="category.html">
+                            <a href="{{route('category.posts', $bannerPosts[0]->category->name )}}">
                                 <h5>{{$bannerPosts[0]->category->name}}</h5>
                             </a>
                             <a href="{{route('single.post', $bannerPosts[0]->slug)}}">
@@ -17,7 +17,7 @@
                     </div>
                     <div class="banner_post_2 banner_post_bg_2">
                         <div class="banner_post_iner">
-                            <a href="category.html">
+                            <a href="{{route('category.posts', $bannerPosts[1]->category->name )}}">
                                 <h5>{{$bannerPosts[1]->category->name}}</h5>
                             </a>
                             <a href="{{route('single.post', $bannerPosts[1]->slug)}}">
