@@ -4,8 +4,8 @@
         <div class="container">
         <div class="row">
             <div class="col-md-8">
-                <h1>{{auth()->user()->name}}'s Posts</h1>
-                <table class="table table-hover">
+                <h1 class="mb-5 text-center">{{auth()->user()->name}}'s Posts</h1>
+                <table class="table table-hover mb-5">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -18,7 +18,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @isset($posts)
+                        @if (count($posts))
                             @foreach ($posts as $post)
                             <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
@@ -39,13 +39,13 @@
                                         <i class="fa-solid fa-trash"></i>
                                     </a>
                                 </td>
-
                             </tr>
                             @endforeach
-                        @endisset
-                        @empty($posts)
-                            <tr>no post</tr>
-                        @endempty
+                        @else
+                            <tr>
+                                <td class="text-center" colspan="6">no post</td>
+                            </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>

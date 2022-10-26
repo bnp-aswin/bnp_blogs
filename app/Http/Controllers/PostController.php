@@ -75,7 +75,7 @@ class PostController extends Controller
     {
         $data = $request->validate([
             'category' => ['required', Rule::exists('categories', 'id')],
-            'title' => ['required', Rule::unique('posts', 'title')],
+            'title' => ['required'],
             'excerpt' => ['required','min:100', 'max:512'],
             'body' => ['required'],
         ]);

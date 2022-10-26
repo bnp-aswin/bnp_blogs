@@ -24,20 +24,21 @@
                                     </li>
                                 @endguest
                                 @auth
-                                    <form id="logout_form" action="{{route('logout')}}" method="POST">
-                                        @csrf
-                                        <li class="nav-item">
-                                            <a class="nav-link" onclick="logout()" href="#">Logout</a>
-                                        </li>
-                                    </form>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{route('post.create')}}"> Add post</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{route('posts.show')}}"> View post</a>
                                     </li>
+                                    <form id="logout_form" action="{{route('logout')}}" method="POST">
+                                        @csrf
+                                        <li class="nav-item">
+                                            <a class="nav-link" onclick="logout()" href="#">Logout</a>
+                                        </li>
+                                    </form>
+
                                 @endauth
-                                <li class="nav-item dropdown">
+                                {{-- <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Pages
@@ -46,7 +47,7 @@
                                         <a class="dropdown-item" href="single-blog.html">Single blog</a>
                                         <a class="dropdown-item" href="elements.html">elements</a>
                                     </div>
-                                </li>
+                                </li> --}}
                             </ul>
                         </div>
                         <div class="header_social_icon d-none d-sm-block">
@@ -59,10 +60,12 @@
                                         </form>
                                     </div>
                                 </li>
-                                <li><a href="#" class="d-none d-lg-block"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                <li><a href="#" class="d-none d-lg-block"> <i class="fa-brands fa-twitter"></i></a></li>
+                                @auth
+                                    <li>Welcome {{auth()->user()->username}}</li>
+                                @endauth
+                                {{-- <li><a href="#" class="d-none d-lg-block"> <i class="fa-brands fa-twitter"></i></a></li>
                                 <li><a href="#" class="d-none d-lg-block"><i class="fa-brands fa-instagram"></i></a></li>
-                                <li><a href="#" class="d-none d-lg-block"><i class="fa-brands fa-skype"></i></a></li>
+                                <li><a href="#" class="d-none d-lg-block"><i class="fa-brands fa-skype"></i></a></li> --}}
                             </ul>
                         </div>
                     </nav>
