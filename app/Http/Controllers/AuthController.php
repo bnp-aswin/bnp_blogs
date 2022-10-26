@@ -17,8 +17,11 @@ class AuthController extends Controller
     public function setLogin(Request $request)
     {
         $user = $request->validate([
-            'email' => ['bail', 'required','email:rfc,dns', Rule::exists('users','email')],
+            'email' => ['bail', 'required','email:rfc,dns', 'exists:users'],
             'password' => ['bail', 'required','min:6','max:255']
+        ],
+        [
+            'email.exists' => "Email does'nt exists in our database",
         ]);
         auth()->attempt($user);
         return redirect()->route('dashboard')->with('status', 'Login successfull');
@@ -33,8 +36,8 @@ class AuthController extends Controller
     {
         $user = $request->validate([
             'name' => ['bail', 'required', 'min:3', 'max:255'],
-            'username' => ['bail', 'required', Rule::unique('users', 'username')],
-            'email' => ['bail', 'required', 'email:rfc,dns', Rule::unique('users', 'email')],
+            'username' => ['bail', 'required', Rule::unique('users')],
+            'email' => ['bail', 'required', 'email:rfc,dns', Rule::unique('users')],
             'password' => ['bail', 'required', 'confirmed', 'min:6', 'max:255']
         ]);
         User::create($user);

@@ -13,7 +13,7 @@
                         <div class="blog_details">
                             <h2>{{$post->title}}</h2>
                             <ul class="blog-info-link mt-3 mb-4">
-                                <li><a href="{{route('category.posts', $post->category->name )}}"><i class="far fa-user"></i> {{$post->category->name}}</a></li>
+                                <li><a href="{{route('category.posts', $post->category->name )}}"><i class="far fa-user"></i> {{ucwords($post->category->name)}}</a></li>
                                 <li><a href="#"><i class="far fa-comments"></i> {{count($comments)}} Comments</a></li>
                             </ul>
                             <p class="excert">{{$post->excerpt}}</p>
