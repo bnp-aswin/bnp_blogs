@@ -1,3 +1,4 @@
+@props(['popularPost'])
 <div class="sidebar_widget">
     <div class="sidebar_tittle">
         <h3>Search Objects</h3>
@@ -17,42 +18,9 @@
     <div class="sidebar_tittle">
         <h3>Popular Feeds</h3>
     </div>
-    <div class="single_catagory_post post_2 single_border_bottom">
-        <div class="category_post_img">
-            <img src="/img/sidebar/sidebar_1.png" alt="">
-        </div>
-        <div class="post_text_1 pr_30">
-            <p><span> By Michal</span> / March 30 , 2019</p>
-            <a href="single-blog.html">
-                <h3>Subdue lesser beast winged
-                    bearing meat tree one</h3>
-            </a>
-        </div>
-    </div>
-    <div class="single_catagory_post post_2 single_border_bottom">
-        <div class="category_post_img">
-            <img src="/img/sidebar/sidebar_2.png" alt="">
-        </div>
-        <div class="post_text_1 pr_30">
-            <p><span> By Michal</span> / March 30 , 2019</p>
-            <a href="single-blog.html">
-                <h3>Subdue lesser beast winged
-                    bearing meat tree one</h3>
-            </a>
-        </div>
-    </div>
-    <div class="single_catagory_post post_2">
-        <div class="category_post_img">
-            <img src="/img/sidebar/sidebar_3.png" alt="">
-        </div>
-        <div class="post_text_1 pr_30">
-            <p><span> By Michal</span> / March 30 , 2019</p>
-            <a href="single-blog.html">
-                <h3>Subdue lesser beast winged
-                    bearing meat tree one</h3>
-            </a>
-        </div>
-    </div>
+    @foreach ($popularPost as $post)
+        <x-single-widget-card :post="$post"></x-single-widget-card>
+    @endforeach
     <div class="sidebar_tittle">
         <h3>Categories</h3>
     </div>

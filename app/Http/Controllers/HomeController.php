@@ -12,7 +12,9 @@ class HomeController extends Controller
         $posts = Post::all();
         return view('index',[
             'bannerPosts' => $posts->take(2),
-            'posts' => $posts->skip(2)
+            'posts' => $posts->skip(2),
+            'popularPost' => $posts->sortBy('views')->reverse()->take(3)
+
         ]);
     }
 }
