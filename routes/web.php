@@ -18,35 +18,35 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/single-post/{post:slug}', [PostController::class, 'getSinglePost'])->name('single.post');
 
 Route::post('/single-post/{post:slug}', [CommentController::class, 'setComment'])->name('comment.store');
 
-Route::get('/register', [AuthController::class, 'getRegister'])->name('register');
+Route::get('/register', [AuthController::class, 'getRegister'])->name('register')->middleware('guest');
 
-Route::post('/register', [AuthController::class, 'setRegister'])->name('user.store');
+Route::post('/register', [AuthController::class, 'setRegister'])->name('user.store')->middleware('guest');
 
-Route::get('/login', [AuthController::class, 'getLogin'])->name('login');
+Route::get('/login', [AuthController::class, 'getLogin'])->name('login')->middleware('guest');
 
-Route::post('/login', [AuthController::class, 'setLogin'])->name('user.auth');;
+Route::post('/login', [AuthController::class, 'setLogin'])->name('user.auth')->middleware('guest');;
 
-Route::post('/logout', [AuthController::class, 'setLogout'])->name('logout');
+Route::post('/logout', [AuthController::class, 'setLogout'])->name('logout')->middleware('auth');
 
-Route::get('/user/dashboard', [UserController::class, 'getDashboard'])->name('dashboard');
+Route::get('/user/dashboard', [UserController::class, 'getDashboard'])->name('dashboard')->middleware('auth');
 
-Route::get('/post/create', [PostController::class, 'getAddPost'])->name('post.create');
+Route::get('/post/create', [PostController::class, 'getAddPost'])->name('post.create')->middleware('auth');
 
-Route::post('/post/create', [PostController::class, 'setAddPost'])->name('post.store');
+Route::post('/post/create', [PostController::class, 'setAddPost'])->name('post.store')->middleware('auth');
 
-Route::get('/user/posts', [PostController::class, 'getPosts'])->name('posts.show');
+Route::get('/user/posts', [PostController::class, 'getPosts'])->name('posts.show')->middleware('auth');
 
-Route::get('/post/delete/{post:slug}', [PostController::class, 'deletePost'])->name('post.delete');
+Route::get('/post/delete/{post:slug}', [PostController::class, 'deletePost'])->name('post.delete')->middleware('auth');
 
-Route::get('post/edit/{post:slug}',[PostController::class, 'getEditPost'])->name('post.edit');
+Route::get('post/edit/{post:slug}',[PostController::class, 'getEditPost'])->name('post.edit')->middleware('auth');
 
-Route::post('post/edit/{post:slug}', [PostController::class, 'setEditPost'])->name('post.update');
+Route::post('post/edit/{post:slug}', [PostController::class, 'setEditPost'])->name('post.update')->middleware('auth');
 
 Route::get('category/{category:name}', [PostController::class, 'getByCategory'])->name('category.posts');
 
