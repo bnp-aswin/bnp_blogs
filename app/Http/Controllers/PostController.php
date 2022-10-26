@@ -9,16 +9,34 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 class PostController extends Controller
 {
-    public function getSinglePost(Post $post)
+    public function getSinglePost(Post $post, Request $request)
     {
-        $post->increment('views');
-        return view('single-post',[
-            'post' => $post,
-            'comments' => $post->comments
-        ]);
+        
+        if (!Auth::check()) {
+            $postCookie = (Str::replace('.', '', ($request->ip())) . '-' . $post->id);
+        } else {
+            $postCookie = (Auth::user()->id . '-' . $post->id);
+        }
+        if (Cookie::get($postCookie) == '') {
+            $cookie = cookie($postCookie, '1', 60);
+            $post->increment('views');
+            return response()
+                ->view('single-post', [
+                    'post' => $post,
+                    'comments' => $post->comments
+                ])
+                ->withCookie($cookie);
+        } else {
+            return  view('single-post', [
+                'post' => $post,
+                'comments' => $post->comments
+            ]);
+        }
     }
 
     public function getAddPost()
