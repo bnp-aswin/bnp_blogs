@@ -1,4 +1,4 @@
-@props(['popularPost'])
+@props(['popularPost','categories'])
 <div class="sidebar_widget">
     <div class="sidebar_tittle">
         <h3>Search Objects</h3>
@@ -26,12 +26,9 @@
     </div>
     <div class="single_catagory_item category">
         <ul class="list-unstyled">
-            <li><a href="single-blog.html">Culture (12)</a></li>
-            <li><a href="single-blog.html">Creative Design (15)</a></li>
-            <li><a href="single-blog.html">Illustration (25)</a></li>
-            <li><a href="single-blog.html">Production (16)</a></li>
-            <li><a href="single-blog.html">Mangement (10)</a></li>
-            <li><a href="single-blog.html">Branding (15)</a></li>
+            @foreach ($categories as $category)
+                <li><a href="{{route('category.posts', $category->name )}}">{{ucwords($category->name)}} ({{count($category->posts)}})</a></li>
+            @endforeach
         </ul>
     </div>
 </div>

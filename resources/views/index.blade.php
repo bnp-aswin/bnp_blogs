@@ -18,7 +18,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <x-side-widget :popularPost="$popularPost"></x-side-widget>
+                    <x-side-widget :popularPost="$popularPost" :categories="$categories"></x-side-widget>
                 </div>
             </div>
         </div>

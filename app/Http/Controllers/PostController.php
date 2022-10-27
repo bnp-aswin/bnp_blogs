@@ -28,13 +28,17 @@ class PostController extends Controller
             return response()
                 ->view('single-post', [
                     'post' => $post,
-                    'comments' => $post->comments
+                    'comments' => $post->comments,
+                    'popularPost' => Post::all()->sortBy('views')->reverse()->take(3),
+                    'categories' => Category::all()
                 ])
                 ->withCookie($cookie);
         } else {
             return  view('single-post', [
                 'post' => $post,
-                'comments' => $post->comments
+                'comments' => $post->comments,
+                'popularPost' => Post::all()->sortBy('views')->reverse()->take(3),
+                'categories' => Category::all()
             ]);
         }
     }
