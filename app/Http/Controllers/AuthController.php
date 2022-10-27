@@ -23,8 +23,14 @@ class AuthController extends Controller
         [
             'email.exists' => "Email does'nt exists in our database",
         ]);
-        auth()->attempt($user);
-        return redirect()->route('dashboard')->with('status', 'Login successfull');
+        if (auth()->attempt($user)) {
+            $userRoleId = auth()->user()->role_id;
+            if($userRoleId == 1){
+                return redirect()->route('admin.dashboard')->with('status', 'Welcome admin');
+            }else{
+                return redirect()->route('dashboard')->with('status', 'Login successfull');
+            }
+        }
     }
 
     public function getRegister()

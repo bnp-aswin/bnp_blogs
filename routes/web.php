@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
@@ -53,3 +54,5 @@ Route::get('category/{category:name}', [PostController::class, 'getByCategory'])
 Route::get('author/{author:username}', [PostController::class, 'getByAuthor'])->name('author.posts');
 
 Route::post('search', [PostController::class, 'getSearch'])->name('search');
+
+Route::get('/admin/dashboard', [AdminController::class, 'getDashboard'])->name('admin.dashboard');
