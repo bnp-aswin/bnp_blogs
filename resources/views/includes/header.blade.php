@@ -28,7 +28,7 @@
                                         <a class="nav-link" href="{{route('post.create')}}"> Add post</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{route('posts.show')}}"> View post</a>
+                                        <a class="nav-link" href="{{route('posts.show')}}"> My Post's</a>
                                     </li>
                                     <form id="logout_form" action="{{route('logout')}}" method="POST">
                                         @csrf
