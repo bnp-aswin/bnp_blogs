@@ -25,4 +25,18 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+/**
+ * When a post is deleted, delete all of its comments
+ */
+    public static function boot()
+    {
+        parent::boot();
+        static::deleting(function($post){
+            foreach($post->comments as $comment){
+                $comment->delete();
+            }
+        });
+        
+    }
 }
