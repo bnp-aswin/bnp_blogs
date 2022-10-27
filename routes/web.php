@@ -56,3 +56,7 @@ Route::get('author/{author:username}', [PostController::class, 'getByAuthor'])->
 Route::post('search', [PostController::class, 'getSearch'])->name('search');
 
 Route::get('/admin/dashboard', [AdminController::class, 'getDashboard'])->name('admin.dashboard');
+
+Route::get('/admin/add/category', [AdminController::class, 'getAddCategory'])->name('category.create');
+
+Route::post('/admin/add/category', [AdminController::class, 'setAddCategory'])->name('post.category');

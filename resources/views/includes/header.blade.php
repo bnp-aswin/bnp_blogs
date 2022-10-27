@@ -24,19 +24,24 @@
                                     </li>
                                 @endguest
                                 @auth
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{route('post.create')}}"> Add post</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{route('posts.show')}}"> My Post's</a>
-                                    </li>
+                                    @if (auth()->user()->role_id == 2)
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{route('post.create')}}"> Add post</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{route('posts.show')}}"> My Post's</a>
+                                        </li>
+                                    @else
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{route('category.create')}}"> Add New Category</a>
+                                        </li>
+                                    @endif
                                     <form id="logout_form" action="{{route('logout')}}" method="POST">
                                         @csrf
                                         <li class="nav-item">
                                             <a class="nav-link" onclick="logout()" href="#">Logout</a>
                                         </li>
                                     </form>
-
                                 @endauth
                                 {{-- <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
