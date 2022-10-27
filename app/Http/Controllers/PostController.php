@@ -122,9 +122,7 @@ class PostController extends Controller
 
     public function deletePost(Post $post)
     {
-        $post->comments()->delete();
-        $currentPostImg = $post->thumbnail;
-        Storage::delete($currentPostImg);
+        Storage::delete($post->thumbnail);
         $post->delete();
         return redirect()->back()->with('status', 'Post deleted successfully');
     }
