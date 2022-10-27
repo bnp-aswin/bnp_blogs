@@ -30,7 +30,7 @@ class PostController extends Controller
                     'post' => $post,
                     'comments' => $post->comments,
                     'popularPost' => Post::all()->sortBy('views')->reverse()->take(3),
-                    'categories' => Category::all()
+                    'categories' => Category::withCount(['posts'])->get()
                 ])
                 ->withCookie($cookie);
         } else {
@@ -38,7 +38,7 @@ class PostController extends Controller
                 'post' => $post,
                 'comments' => $post->comments,
                 'popularPost' => Post::all()->sortBy('views')->reverse()->take(3),
-                'categories' => Category::all()
+                'categories' => Category::withCount(['posts'])->get()
             ]);
         }
     }

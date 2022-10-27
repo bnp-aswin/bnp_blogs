@@ -27,7 +27,7 @@
     <div class="single_catagory_item category">
         <ul class="list-unstyled">
             @foreach ($categories as $category)
-                <li><a href="{{route('category.posts', $category->name )}}">{{ucwords($category->name)}} ({{count($category->posts)}})</a></li>
+                <li><a href="{{route('category.posts', $category->name )}}">{{ucwords($category->name)}} ({{$category->posts_count}})</a></li>
             @endforeach
         </ul>
     </div>

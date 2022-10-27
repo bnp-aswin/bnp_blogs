@@ -15,7 +15,7 @@ class HomeController extends Controller
             'bannerPosts' => $posts->take(2),
             'posts' => $posts->skip(2),
             'popularPost' => $posts->sortBy('views')->reverse()->take(3),
-            'categories' => Category::all()
+            'categories' => Category::withCount(['posts'])->get()
 
         ]);
     }
