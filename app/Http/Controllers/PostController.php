@@ -25,29 +25,25 @@ class PostController extends Controller
         if (Cookie::get($postCookie) == '') {
             $cookie = cookie($postCookie, '1', 60);
             $post->increment('views');
+            $comments = $post->comments;
+            $popularPost = Post::all()->sortBy('views')->reverse()->take(3);
+            $categories = Category::withCount(['posts'])->get();
             return response()
-                ->view('single-post', [
-                    'post' => $post,
-                    'comments' => $post->comments,
-                    'popularPost' => Post::all()->sortBy('views')->reverse()->take(3),
-                    'categories' => Category::withCount(['posts'])->get()
-                ])
+                ->view('single-post', compact('post', 'comments', 'popularPost', 'categories'))
                 ->withCookie($cookie);
-        } else {
-            return  view('single-post', [
-                'post' => $post,
-                'comments' => $post->comments,
-                'popularPost' => Post::all()->sortBy('views')->reverse()->take(3),
-                'categories' => Category::withCount(['posts'])->get()
-            ]);
+        } 
+        else {
+            $comments = $post->comments;
+            $popularPost = Post::all()->sortBy('views')->reverse()->take(3);
+            $categories = Category::withCount(['posts'])->get();
+            return  view('single-post', compact('post', 'comments', 'popularPost', 'categories'));
         }
     }
 
     public function getAddPost()
     {
-        return view('user.add-post',[
-            'categories' => Category::all()
-        ]);
+        $categories = Category::all();
+        return view('user.add-post', compact('categories'));
     }
 
     public function setAddPost(Request $request)
@@ -65,7 +61,6 @@ class PostController extends Controller
             'thumbnail.max' => 'The thumbnail size must be below 2048kb',
             'thumbnail.mimes' => "The thumbnail must be a file of type: png.",
         ]);
-        // dd($post['thumbnail']->file('thumbnail'));
         Post::create([
             'user_id' => $post['user_id'],
             'category_id' => $post['category'],
@@ -80,17 +75,14 @@ class PostController extends Controller
 
     public function getPosts()
     {
-        return view('user.view-posts', [
-            'posts' => Post::where('user_id', auth()->user()->id)->get()
-        ]);
+        $posts = Post::where('user_id', auth()->user()->id)->get();
+        return view('user.view-posts', compact('posts'));
     }
 
     public function getEditPost(Post $post)
     {
-        return view('user.edit-post',[
-            'post' => $post,
-            'categories' => Category::all()
-        ]);
+        $categories = Category::all();
+        return view('user.edit-post', compact('post', 'categories'));
     }
 
     public function setEditPost(Post $post, Request $request)
@@ -129,18 +121,16 @@ class PostController extends Controller
 
     public function getByCategory(Category $category)
     {
-        return view('posts', [
-            'posts' => $category->posts()->get(),
-            'title' => "$category->name " .'Category'
-        ]);
+        $posts = $category->posts()->get();
+        $title = "$category->name " .'Category';
+        return view('posts', compact('posts', 'title'));
     }
 
     public function getByAuthor(User $author)
     {
-        return view('posts', [
-            'posts' => $author->posts()->get(),
-            'title' => 'Author ' . "$author->name"
-        ]);
+        $posts = $author->posts()->get();
+        $title = 'Author ' . "$author->name";
+        return view('posts', compact('posts', 'title'));
     }
 
     public function getSearch()
@@ -149,10 +139,7 @@ class PostController extends Controller
         $posts = Post::where('title', 'Like', "%{$search}%")
             ->orWhere('body', 'Like', "%{$search}%")
             ->get();
-        
-        return view('posts', [
-            'posts' => $posts,
-            'title' => 'Search result'
-        ]);
+        $title = 'Search result';
+        return view('posts', compact('posts', 'title'));
     }
 }
