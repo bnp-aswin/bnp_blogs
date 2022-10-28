@@ -11,11 +11,8 @@ class HomeController extends Controller
     public function index()
     {
         $posts = Post::all();
-        return view('index',[
-            'posts' => $posts,
-            'popularPost' => $posts->sortBy('views')->reverse()->take(4),
-            'categories' => Category::withCount(['posts'])->get()
-
-        ]);
+        $popularPost = $posts->sortBy('views')->reverse()->take(4);
+        $categories = Category::withCount(['posts'])->get();
+        return view('index', compact('posts', 'popularPost', 'categories'));
     }
 }
