@@ -4,7 +4,7 @@
             <div class="col-lg-12">
                 <div class="breadcrumb_iner text-center">
                     <div class="breadcrumb_iner_item">
-                        <h2>Blog Single</h2>
+                        <h2>{{$slot}}</h2>
                     </div>
                 </div>
             </div>

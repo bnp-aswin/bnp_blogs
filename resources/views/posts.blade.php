@@ -1,8 +1,8 @@
 @extends('layout.default')
 
 @section('content')
+    <x-breadcrumb>{{$title}} Posts</x-breadcrumb>
     <section class="all_post section_padding">
-        <h1 class="text-center">Post's by {{$title}}</h1>
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
