@@ -1,7 +1,6 @@
 @extends('layout.default')
 
 @section('content')
-    <x-banner :bannerPosts="$bannerPosts"></x-banner>
     <section class="all_post section_padding">
         <div class="container">
             <div class="row">
