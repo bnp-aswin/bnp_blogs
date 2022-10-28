@@ -1,7 +1,7 @@
 @extends('layout.default')
 
 @section('content')
-    @include('includes.breadcrumb')
+    <x-breadcrumb>Single Blog Post</x-breadcrumb>
     <section class="blog_area single-post-area all_post section_padding">
         <div class="container">
             <div class="row">
@@ -14,7 +14,7 @@
                             <h2>{{$post->title}}</h2>
                             <ul class="blog-info-link mt-3 mb-4">
                                 <li><a href="{{route('category.posts', $post->category->name )}}"><i class="far fa-user"></i> {{ucwords($post->category->name)}}</a></li>
-                                <li><a href="#"><i class="far fa-comments"></i> {{count($comments)}} Comments</a></li>
+                                <li><a href="#comments"><i class="far fa-comments"></i> {{count($comments)}} Comments</a></li>
                             </ul>
                             <p class="excert">{{$post->excerpt}}</p>
                             <p>{{$post->body}}</p>
@@ -72,7 +72,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="comments-area">
+                    <div id="comments" class="comments-area">
                         <h4>{{count($comments)}} Comments</h4>
                         @if (count($comments))
                             @foreach ($comments as $comment )
