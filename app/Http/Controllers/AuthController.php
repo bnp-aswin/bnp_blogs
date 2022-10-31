@@ -41,10 +41,10 @@ class AuthController extends Controller
     public function setRegister(Request $request)
     {
         $user = $request->validate([
-            'name' => ['bail', 'required', 'min:3', 'max:255'],
+            'name' => ['bail', 'required', 'min:3', 'max:'. config('constant.max_string_length')],
             'username' => ['bail', 'required', Rule::unique('users')],
             'email' => ['bail', 'required', 'email:rfc,dns', Rule::unique('users')],
-            'password' => ['bail', 'required', 'confirmed', 'min:6', 'max:255']
+            'password' => ['bail', 'required', 'confirmed', 'min:6', 'max:' . config('constant.max_string_length')]
         ]);
         User::create($user);
         return redirect()->route('login')->with('status', 'User register successfully');
