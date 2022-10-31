@@ -13,7 +13,7 @@ class CommentController extends Controller
     {
         $comment = $request->validate([
             'post_id' => ['required'],
-            'comment' => ['required'],
+            'comment' => ['required', 'max:' . config('constant.max_string_length')],
             'username' => Rule::requiredIf(!auth()->check()),
             'email' => Rule::requiredIf(!auth()->check())
         ]);
