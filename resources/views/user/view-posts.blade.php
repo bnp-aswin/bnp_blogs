@@ -11,6 +11,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Title</th>
                             <th scope="col">Created</th>
+                            <th scope="col">Last Updated</th>
                             <th scope="col">View</th>
                             <th scope="col">Edit</th>
                             <th scope="col">Delete</th>
@@ -24,6 +25,7 @@
                                 <th scope="row">{{$loop->iteration}}</th>
                                 <td>{{$post->title}}</td>
                                 <td>{{$post->created_at}}</td>
+                                <td>{{$post->updated_at->diffForHumans()}}</td>
                                 <td>
                                     <a href="{{route('single.post', $post)}}">
                                         <i class="fa-solid fa-eye"></i>
