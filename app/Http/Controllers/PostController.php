@@ -133,11 +133,13 @@ class PostController extends Controller
         return view('posts', compact('posts', 'title'));
     }
 
-    public function getSearch()
+    public function getSearch(Request $request)
     {
-        $search = request('search');
-        $posts = Post::where('title', 'Like', "%{$search}%")
-            ->orWhere('body', 'Like', "%{$search}%")
+        $value = $request->validate([
+            'search' => ['required'],
+        ]);
+        $posts = Post::whereTitle('Like', "%{$value['search']}%")
+            ->orWhere('body', 'Like', "%{$value['search']}%")
             ->get();
         $title = 'Search result';
         return view('posts', compact('posts', 'title'));

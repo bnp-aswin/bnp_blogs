@@ -9,8 +9,10 @@
                     @if (count($posts))
                         @foreach ($posts as $post)
                             <x-post-card :post="$post"></x-post-card>
-                        @endforeach 
-                        {{$posts->links()}}
+                        @endforeach
+                        @if ($posts instanceof Illuminate\Pagination\LengthAwarePaginator)
+                            {{$posts->links()}}
+                        @endif 
                     @else
                         <p class="text-center">no posts available</p>
                     @endif
