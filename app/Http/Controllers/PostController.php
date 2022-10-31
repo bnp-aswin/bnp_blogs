@@ -121,14 +121,14 @@ class PostController extends Controller
 
     public function getByCategory(Category $category)
     {
-        $posts = $category->posts()->get();
+        $posts = $category->posts()->paginate(2);
         $title = "$category->name " .'Category';
         return view('posts', compact('posts', 'title'));
     }
 
     public function getByAuthor(User $author)
     {
-        $posts = $author->posts()->get();
+        $posts = $author->posts()->paginate(2);
         $title = 'Author ' . "$author->name";
         return view('posts', compact('posts', 'title'));
     }
