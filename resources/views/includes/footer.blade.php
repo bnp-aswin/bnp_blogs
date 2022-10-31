@@ -51,7 +51,7 @@
                     <div class="copyright_part_text text-center">
                         <p class="footer-text m-0">
                             Copyright &copy;
-                            <script>document.write(new Date().getFullYear());</script> All rights reserved | <i class="fa-solid fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com/"
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved | <i class="fa-solid fa-heart" aria-hidden="true"></i> by <a href="https://bitsnpixs.com/contact-us"
                                 target="_blank">Bitsnpixs</a>
                         </p>
                     </div>
