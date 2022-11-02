@@ -33,6 +33,9 @@
                                         </li>
                                     @else
                                         <li class="nav-item">
+                                            <a class="nav-link" href="{{route('all-posts')}}"> View Posts</a>
+                                        </li>
+                                        <li class="nav-item">
                                             <a class="nav-link" href="{{route('category.create')}}"> Add New Category</a>
                                         </li>
                                     @endif

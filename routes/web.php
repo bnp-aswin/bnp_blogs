@@ -60,3 +60,7 @@ Route::get('/admin/dashboard', [AdminController::class, 'getDashboard'])->name('
 Route::get('/admin/add/category', [AdminController::class, 'getAddCategory'])->name('category.create');
 
 Route::post('/admin/add/category', [AdminController::class, 'setAddCategory'])->name('post.category');
+
+Route::get('/admin/all-posts', [AdminController::class, 'getPosts'])->name('all-posts');
+
+Route::post('/post/status', [AdminController::class, 'updatePostStatus'])->name('postStatus');
