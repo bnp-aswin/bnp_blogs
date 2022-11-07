@@ -26,7 +26,7 @@ class PostController extends Controller
             $cookie = cookie($postCookie, '1', 60);
             $post->increment('views');
             $comments = $post->comments;
-            $popularPost = Post::all()->sortBy('views')->reverse()->take(3);
+            $popularPost = Post::all()->where('status', true)->sortBy('views')->reverse()->take(3);
             $categories = Category::withCount(['posts'])->get();
             return response()
                 ->view('single-post', compact('post', 'comments', 'popularPost', 'categories'))
@@ -34,7 +34,7 @@ class PostController extends Controller
         } 
         else {
             $comments = $post->comments;
-            $popularPost = Post::all()->sortBy('views')->reverse()->take(3);
+            $popularPost = Post::all()->where('status', true)->sortBy('views')->reverse()->take(3);
             $categories = Category::withCount(['posts'])->get();
             return  view('single-post', compact('post', 'comments', 'popularPost', 'categories'));
         }
@@ -121,14 +121,14 @@ class PostController extends Controller
 
     public function getByCategory(Category $category)
     {
-        $posts = $category->posts()->paginate(2);
+        $posts = $category->posts()->whereStatus(true)->paginate(2);
         $title = "$category->name " .'Category';
         return view('posts', compact('posts', 'title'));
     }
 
     public function getByAuthor(User $author)
     {
-        $posts = $author->posts()->paginate(2);
+        $posts = $author->posts()->whereStatus(true)->paginate(2);
         $title = 'Author ' . "$author->name";
         return view('posts', compact('posts', 'title'));
     }
@@ -140,6 +140,7 @@ class PostController extends Controller
         ]);
         $posts = Post::whereTitle('Like', "%{$value['search']}%")
             ->orWhere('body', 'Like', "%{$value['search']}%")
+            ->whereStatus(true)
             ->get();
         $title = 'Search result';
         return view('posts', compact('posts', 'title'));

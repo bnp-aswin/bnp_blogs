@@ -59,7 +59,7 @@
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <div class="row">
                             <div class="col-md-12">
-                                <table class="table table-hover mb-5">
+                                <table class="table table-hover table-responsive mb-5">
                                     <thead>
                                         <tr>
                                             <th scope="col">Title</th>
@@ -98,7 +98,7 @@
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="row">
                             <div class="col-md-12">
-                                <table class="table table-hover mb-5">
+                                <table class="table table-hover table-responsive mb-5">
                                     <thead>
                                         <tr>
                                             <th scope="col">Title</th>
