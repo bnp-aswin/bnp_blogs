@@ -25,7 +25,7 @@ class AdminController extends Controller
     {
         // dd('test');
         $category = $request->validate([
-            'category' => ['required', 'min:3', 'max:20']
+            'category' => ['required', 'min:3', 'max:20','unique:categories,name']
         ]);
         Category::create([
             'name' => $category['category']
