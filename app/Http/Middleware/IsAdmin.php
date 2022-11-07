@@ -18,7 +18,7 @@ class IsAdmin
     {
         if(auth()->check() && auth()->user()->role_id != $role){
 
-            return redirect()->route('home')->with('status', 'Login as admin to view this page');
+            return redirect()->route('home')->with('status', 'Login as admin to view this page')->with('type', 'danger');
         }
         return $next($request);
     }

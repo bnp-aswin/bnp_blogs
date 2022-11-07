@@ -56,7 +56,7 @@ Route::controller(AuthController::class)->group(function(){
 
 Route::post('/single-post/{post:slug}', [CommentController::class, 'setComment'])->name('comment.store');
 
-Route::get('/user/dashboard', [UserController::class, 'getDashboard'])->name('dashboard')->middleware('isAuthUser:1');
+Route::get('/user/dashboard', [UserController::class, 'getDashboard'])->name('dashboard')->middleware('isAuthUser:2');
 
 Route::controller(AdminController::class)->group(function(){
 

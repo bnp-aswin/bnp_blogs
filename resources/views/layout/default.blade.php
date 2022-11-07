@@ -16,7 +16,7 @@
 
 <body>
     @if (session()->has('status'))
-        <p>{{session('status')}}</p>
+        <p class="alert alert-{{session('type')}}">{{session('status')}}</p>
     @endif
     @include('includes.header')
         @yield('content')

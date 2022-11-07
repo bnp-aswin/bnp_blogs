@@ -54,7 +54,7 @@ class PostController extends Controller
             'title' => ['required', Rule::unique('posts', 'title')],
             'excerpt' => ['required','min:100', 'max:512'],
             'body' => ['required'],
-            'thumbnail' => 'bail|required|file|max:2048|mimes:png'
+            'thumbnail' => 'bail|required|file|max:5096|mimes:png,jpg'
         ],
         [
             'thumbnail.file' => "The thumbnail must be a file of type: png.",
@@ -70,7 +70,7 @@ class PostController extends Controller
             'body' => $post['body'],
             'thumbnail' => $request->file('thumbnail')->store('thumbnails')
         ]);
-        return redirect()->route('posts.show')->with('status', 'New Post created');
+        return redirect()->route('posts.show')->with('status', 'New Post created')->with('type', 'success');
     }
 
     public function getPosts()
@@ -108,7 +108,7 @@ class PostController extends Controller
             'slug' => Str::slug($data['title']),
             'thumbnail' => $newImgPath
         ]);
-        return redirect()->route('posts.show')->with('status', 'Post Updated successfully');
+        return redirect()->route('posts.show')->with('status', 'Post Updated successfully')->with('type', 'success');
         
     }
 
@@ -116,7 +116,7 @@ class PostController extends Controller
     {
         Storage::delete($post->thumbnail);
         $post->delete();
-        return redirect()->back()->with('status', 'Post deleted successfully');
+        return redirect()->back()->with('status', 'Post deleted successfully')->with('type', 'success');
     }
 
     public function getByCategory(Category $category)

@@ -28,6 +28,6 @@ class CommentController extends Controller
             Comment::create($comment);
         }
         
-        return redirect()->back()->with('status', 'Comment Posted successfuly');
+        return redirect()->back()->with('status', 'Comment Posted successfuly')->with('type', 'success');
     }
 }

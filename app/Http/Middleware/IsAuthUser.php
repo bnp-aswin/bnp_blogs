@@ -18,7 +18,7 @@ class IsAuthUser
     {
         if (auth()->check() && auth()->user()->role_id != $role) {
 
-            return redirect()->route('home')->with('status', 'UnAthorized user for this page');
+            return redirect()->route('home')->with('status', 'UnAthorized user for this page')->with('type', 'danger');
         }
         return $next($request);
     }

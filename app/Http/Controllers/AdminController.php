@@ -30,7 +30,7 @@ class AdminController extends Controller
         Category::create([
             'name' => $category['category']
         ]);
-        return redirect()->back()->with('status', 'New Category added');
+        return redirect()->back()->with('status', 'New Category added')->with('type', 'success');
     }
 
     public function getPosts()
@@ -49,7 +49,7 @@ class AdminController extends Controller
         $post->update([
             'status' => !$post->status
         ]);
-        return redirect()->back()->with('Post status updated successfully');
+        return redirect()->back()->with('Post status updated successfully')->with('type', 'success');
         
     }
 }

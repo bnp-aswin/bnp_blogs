@@ -26,9 +26,9 @@ class AuthController extends Controller
         if (auth()->attempt($user)) {
             $userRoleId = auth()->user()->role_id;
             if($userRoleId == 1){
-                return redirect()->route('admin.dashboard')->with('status', 'Welcome admin');
+                return redirect()->route('admin.dashboard')->with('status', 'Welcome admin')->with('type', 'success');
             }else{
-                return redirect()->route('dashboard')->with('status', 'Login successfull');
+                return redirect()->route('dashboard')->with('status', 'Login successfull')->with('type', 'success');
             }
         }
     }
@@ -47,7 +47,7 @@ class AuthController extends Controller
             'password' => ['bail', 'required', 'confirmed', 'min:6', 'max:' . config('constant.max_string_length')]
         ]);
         User::create($user);
-        return redirect()->route('login')->with('status', 'User register successfully');
+        return redirect()->route('login')->with('status', 'User register successfully')->with('type', 'success');
     }
 
     public function dashboard()
@@ -58,7 +58,7 @@ class AuthController extends Controller
     public function setLogout()
     {
         auth()->logout();
-        return redirect()->route('home')->with('status', 'Logout Successfull');
+        return redirect()->route('home')->with('status', 'Logout Successfull')->with('type', 'success');
     }
 
 }
