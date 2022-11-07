@@ -21,46 +21,56 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/single-post/{post:slug}', [PostController::class, 'getSinglePost'])->name('single.post');
+Route::controller(PostController::class)->group(function(){
+
+    Route::middleware('isAuthUser:2')->group(function(){
+
+        Route::get('/post/create', 'getAddPost')->name('post.create')->middleware('auth');
+        Route::post('/post/create', 'setAddPost')->name('post.store')->middleware('auth');
+        Route::get('/user/posts', 'getPosts')->name('posts.show')->middleware('auth');
+        Route::get('/post/delete/{post:slug}', 'deletePost')->name('post.delete')->middleware('auth');
+        Route::get('post/edit/{post:slug}', 'getEditPost')->name('post.edit')->middleware('auth');
+        Route::post('post/edit/{post:slug}', 'setEditPost')->name('post.update')->middleware('auth');
+    });
+
+    Route::get('/single-post/{post:slug}', 'getSinglePost')->name('single.post');
+    Route::get('category/{category:name}', 'getByCategory')->name('category.posts');
+    Route::get('author/{author:username}', 'getByAuthor')->name('author.posts');
+    Route::post('search', 'getSearch')->name('search');
+
+});
+
+Route::controller(AuthController::class)->group(function(){
+
+    Route::middleware(['guest'])->group(function(){
+
+        Route::get('/register', 'getRegister')->name('register');
+        Route::post('/register', 'setRegister')->name('user.store');
+        Route::get('/login', 'getLogin')->name('login');
+        Route::post('/login', 'setLogin')->name('user.auth');
+
+    });
+    Route::post('/logout', 'setLogout')->name('logout')->middleware('auth');
+
+});
 
 Route::post('/single-post/{post:slug}', [CommentController::class, 'setComment'])->name('comment.store');
 
-Route::get('/register', [AuthController::class, 'getRegister'])->name('register')->middleware('guest');
+Route::get('/user/dashboard', [UserController::class, 'getDashboard'])->name('dashboard')->middleware('isAuthUser:1');
 
-Route::post('/register', [AuthController::class, 'setRegister'])->name('user.store')->middleware('guest');
+Route::controller(AdminController::class)->group(function(){
 
-Route::get('/login', [AuthController::class, 'getLogin'])->name('login')->middleware('guest');
+    Route::middleware(['isAdmin:1'])->group(function(){
 
-Route::post('/login', [AuthController::class, 'setLogin'])->name('user.auth')->middleware('guest');;
+        Route::get('/admin/dashboard', 'getDashboard')->name('admin.dashboard')->middleware('isAdmin:1');
+        Route::get('/admin/add/category', 'getAddCategory')->name('category.create');
+        Route::post('/admin/add/category', 'setAddCategory')->name('post.category');
+        Route::get('/admin/all-posts', 'getPosts')->name('all-posts');
+        Route::post('/post/status', 'updatePostStatus')->name('postStatus');
 
-Route::post('/logout', [AuthController::class, 'setLogout'])->name('logout')->middleware('auth');
+    });
+});
 
-Route::get('/user/dashboard', [UserController::class, 'getDashboard'])->name('dashboard')->middleware('auth');
 
-Route::get('/post/create', [PostController::class, 'getAddPost'])->name('post.create')->middleware('auth');
 
-Route::post('/post/create', [PostController::class, 'setAddPost'])->name('post.store')->middleware('auth');
 
-Route::get('/user/posts', [PostController::class, 'getPosts'])->name('posts.show')->middleware('auth');
-
-Route::get('/post/delete/{post:slug}', [PostController::class, 'deletePost'])->name('post.delete')->middleware('auth');
-
-Route::get('post/edit/{post:slug}',[PostController::class, 'getEditPost'])->name('post.edit')->middleware('auth');
-
-Route::post('post/edit/{post:slug}', [PostController::class, 'setEditPost'])->name('post.update')->middleware('auth');
-
-Route::get('category/{category:name}', [PostController::class, 'getByCategory'])->name('category.posts');
-
-Route::get('author/{author:username}', [PostController::class, 'getByAuthor'])->name('author.posts');
-
-Route::post('search', [PostController::class, 'getSearch'])->name('search');
-
-Route::get('/admin/dashboard', [AdminController::class, 'getDashboard'])->name('admin.dashboard');
-
-Route::get('/admin/add/category', [AdminController::class, 'getAddCategory'])->name('category.create');
-
-Route::post('/admin/add/category', [AdminController::class, 'setAddCategory'])->name('post.category');
-
-Route::get('/admin/all-posts', [AdminController::class, 'getPosts'])->name('all-posts');
-
-Route::post('/post/status', [AdminController::class, 'updatePostStatus'])->name('postStatus');
