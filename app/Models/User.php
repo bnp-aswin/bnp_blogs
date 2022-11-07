@@ -43,6 +43,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
+    
+    public function approvedPosts()
+    {
+        return $this->hasMany(Post::class)->whereStatus(true);
+    }
 
     public function setPasswordAttribute($password)
     {

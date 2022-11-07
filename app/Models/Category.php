@@ -14,4 +14,9 @@ class Category extends Model
     {
         return $this->hasMany(Post::class);
     }
+
+    public function approvedPosts()
+    {
+        return $this->hasMany(Post::class)->whereStatus(true);
+    }
 }
