@@ -1,7 +1,7 @@
 @props(['popularPost','categories'])
 <div class="sidebar_widget">
     <div class="sidebar_tittle">
-        <h3>Search Objects</h3>
+        <h3>Search Posts</h3>
     </div>
     <form action="{{route('search')}}" method="POST">
         @csrf
