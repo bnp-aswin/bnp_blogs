@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $posts = Post::whereStatus(true)->paginate(6)->fragment('posts');
+        $posts = Post::whereStatus(true)->orderBy('created_at','desc')->paginate(6)->fragment('posts');
         $popularPost = $posts->sortBy('views')->reverse()->take(4);
         $categories = Category::withCount(['posts'])->get();
         // dd($categories);

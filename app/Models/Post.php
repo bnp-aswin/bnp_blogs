@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Post extends Model
 {
@@ -33,6 +34,7 @@ class Post extends Model
     {
         parent::boot();
         static::deleting(function($post){
+            Storage::delete($post->thumbnail);
             foreach($post->comments as $comment){
                 $comment->delete();
             }
