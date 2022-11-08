@@ -25,12 +25,12 @@ Route::controller(PostController::class)->group(function(){
 
     Route::middleware('isAuthUser:2')->group(function(){
 
-        Route::get('/post/create', 'getAddPost')->name('post.create')->middleware('auth');
-        Route::post('/post/create', 'setAddPost')->name('post.store')->middleware('auth');
-        Route::get('/user/posts', 'getPosts')->name('posts.show')->middleware('auth');
-        Route::get('/post/delete/{post:slug}', 'deletePost')->name('post.delete')->middleware('auth');
-        Route::get('post/edit/{post:slug}', 'getEditPost')->name('post.edit')->middleware('auth');
-        Route::post('post/edit/{post:slug}', 'setEditPost')->name('post.update')->middleware('auth');
+        Route::get('/post/create', 'getAddPost')->name('post.create');
+        Route::post('/post/create', 'setAddPost');
+        Route::get('/user/posts', 'getPosts')->name('posts.show');
+        Route::get('/post/delete/{post:slug}', 'deletePost')->name('post.delete');
+        Route::get('post/edit/{post:slug}', 'getEditPost')->name('post.edit');
+        Route::post('post/edit/{post:slug}', 'setEditPost');
     });
 
     Route::get('/single-post/{post:slug}', 'getSinglePost')->name('single.post');
@@ -45,16 +45,16 @@ Route::controller(AuthController::class)->group(function(){
     Route::middleware(['guest'])->group(function(){
 
         Route::get('/register', 'getRegister')->name('register');
-        Route::post('/register', 'setRegister')->name('user.store');
+        Route::post('/register', 'setRegister');
         Route::get('/login', 'getLogin')->name('login');
-        Route::post('/login', 'setLogin')->name('user.auth');
+        Route::post('/login', 'setLogin');
 
     });
     Route::post('/logout', 'setLogout')->name('logout')->middleware('auth');
 
 });
 
-Route::post('/single-post/{post:slug}', [CommentController::class, 'setComment'])->name('comment.store');
+Route::post('/single-post/{post:slug}', [CommentController::class, 'setComment']);
 
 Route::get('/user/dashboard', [UserController::class, 'getDashboard'])->name('dashboard')->middleware('isAuthUser:2');
 
@@ -62,11 +62,11 @@ Route::controller(AdminController::class)->group(function(){
 
     Route::middleware(['isAdmin:1'])->group(function(){
 
-        Route::get('/admin/dashboard', 'getDashboard')->name('admin.dashboard')->middleware('isAdmin:1');
+        Route::get('/admin/dashboard', 'getDashboard')->name('admin.dashboard');
         Route::get('/admin/add/category', 'getAddCategory')->name('category.create');
-        Route::post('/admin/add/category', 'setAddCategory')->name('post.category');
+        Route::post('/admin/add/category', 'setAddCategory');
         Route::get('/admin/all-posts', 'getPosts')->name('all-posts');
-        Route::post('/post/status', 'updatePostStatus')->name('postStatus');
+        Route::post('/admin/all-posts', 'updatePostStatus');
 
     });
 });

@@ -76,7 +76,7 @@
                                                 <td>{{$post->excerpt}}</td>
                                                 <td>{{$post->author->name}}</td>
                                                 <td>
-                                                    <form action="{{route('postStatus')}}" method="post">
+                                                    <form action="{{route('all-posts')}}" method="post">
                                                         @csrf
                                                         <input type="hidden" name="post_id" value="{{$post->id}}">
                                                         <button class="btn" type="submit"><i style="color: red" title="Approve" class="fa-sharp fa-solid fa-thumbs-down"></i></button>
@@ -115,7 +115,7 @@
                                                 <td>{{$post->excerpt}}</td>
                                                 <td>{{$post->author->name}}</td>
                                                 <td>
-                                                    <form action="{{route('postStatus')}}" method="post">
+                                                    <form action="{{route('all-posts')}}" method="post">
                                                         @csrf
                                                         <input type="hidden" name="post_id" value="{{$post->id}}">
                                                         <button class="btn" type="submit"><i style="color: green" title="Reject" class="fa-sharp fa-solid fa-thumbs-up"></i></button>

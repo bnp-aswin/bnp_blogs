@@ -82,7 +82,7 @@
                     </div>
                     <div class="comment-form">
                         <h4>Post a comment here...</h4>
-                        <form class="form-contact comment_form" method="POST" action="{{route('comment.store', $post)}}" id="commentForm">
+                        <form class="form-contact comment_form" method="POST" action="{{route('single.post', $post)}}" id="commentForm">
                             @csrf
                             <div class="row">
                                 <input type="hidden" name="post_id" value="{{$post->id}}">

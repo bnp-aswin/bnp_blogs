@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <h4 class="mb-5 text-center"><b>Update:</b> {{$post->title}}</h4>
-                <form class="form-contact comment_form" method="POST" action="{{route('post.update', $post)}}" enctype="multipart/form-data">
+                <form class="form-contact comment_form" method="POST" action="{{route('post.edit', $post)}}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="category">Select Category</label>

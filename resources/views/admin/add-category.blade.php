@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-4">
                 <h3>Add New Category</h3>
-                <form action="{{route('post.category')}}" method="post">
+                <form action="{{route('category.create')}}" method="post">
                     @csrf
                     <x-form.input name="category"/>
                     <x-form.button>Add Category</x-form.button>
