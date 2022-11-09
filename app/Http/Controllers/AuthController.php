@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewUserNotification;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
 
 class AuthController extends Controller
@@ -46,7 +48,9 @@ class AuthController extends Controller
             'email' => ['bail', 'required', 'email:rfc,dns', Rule::unique('users')],
             'password' => ['bail', 'required', 'confirmed', 'min:6', 'max:' . config('constant.max_string_length')]
         ]);
-        User::create($user);
+        if(User::create($user)){
+            Mail::to($user['email'])->send(new NewUserNotification($user));
+        }
         return redirect()->route('login')->with('status', 'User register successfully')->with('type', 'success');
     }
 
