@@ -3,6 +3,6 @@ window.$ = $;
 
 $(() => {
     $(document).ready(function () {
-        $('.alert').hide(3000);
+        $('.alert').hide(5000);
     });
 });
