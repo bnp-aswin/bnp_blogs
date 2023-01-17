@@ -5,8 +5,7 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                "resources/css/app.css",
-                "resources/css/bootstrap.css",
+                "resources/scss/app.scss",
                 "resources/js/jquery-1.12.1.js",
                 "resources/js/popper.js",
             ],
