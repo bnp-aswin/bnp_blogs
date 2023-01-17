@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Notifications\PostPublishedNotification;
+use Illuminate\Support\Facades\Notification;
+
 class AdminController extends Controller
 {
     //
@@ -46,9 +50,11 @@ class AdminController extends Controller
             'post_id' => ['required', Rule::exists('posts', 'id')]
         ]);
         $post = Post::where('id', $data['post_id'])->first();
+        $user = User::where('id', $post->user_id)->first();
         $post->update([
             'status' => !$post->status
         ]);
+        Notification::route('mail', $user->email)->notify(new PostPublishedNotification($user->name, $post->title));
         return redirect()->back()->with('Post status updated successfully')->with('type', 'success');
         
     }
