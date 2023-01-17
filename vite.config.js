@@ -6,7 +6,7 @@ export default defineConfig({
         laravel({
             input: [
                 "resources/scss/app.scss",
-                "resources/js/jquery-1.12.1.js",
+                "resources/js/app.js",
                 "resources/js/popper.js",
             ],
             refresh: true,
