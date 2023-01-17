@@ -39,8 +39,8 @@ class AdminController extends Controller
 
     public function getPosts()
     {
-        $publishedPosts = Post::where('status', true)->paginate(10);
-        $unpublishedPosts  = Post::where('status', false)->paginate(10);
+        $publishedPosts = Post::where('status', true)->with('author')->paginate(10);
+        $unpublishedPosts  = Post::where('status', false)->with('author')->paginate(10);
         return view('admin.posts', compact('publishedPosts', 'unpublishedPosts'));
     }
 

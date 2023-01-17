@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 class Post extends Model
 {
     use HasFactory;
-    protected $with = ['author', 'category', 'comments'];
+    // protected $with = ['author', 'category', 'comments'];
     protected $guarded = [];
     
     public function author()
