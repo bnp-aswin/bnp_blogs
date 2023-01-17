@@ -16,7 +16,7 @@
 
                         <div class="col-4">
                             <div class="">
-                                <button style="height: 52px" class="btn" type="submit"><i class="fa-brands fa-searchengin"></i></button>
+                                <button style="height: 52px" class="btn" type="submit"><i class="ti-search"></i></button>
                             </div>
                         </div>
                     </div>
