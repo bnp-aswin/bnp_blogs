@@ -32,6 +32,8 @@ class AuthController extends Controller
             }else{
                 return redirect()->route('dashboard')->with('status', 'Login successfull')->with('type', 'success');
             }
+        }else{
+            return redirect()->back()->with('status', 'Invalid email or password')->with('type', 'danger');
         }
     }
 

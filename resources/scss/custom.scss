@@ -1,0 +1,16 @@
+textarea{
+    resize: horizontal;
+}
+
+.alert{
+    position: absolute !important;
+    top: 0;
+    right: 0;
+    left: 0;
+    padding: 3px 0 !important;
+}
+
+.alert-dismissible .close{
+    padding: 0 !important;
+    margin-right: 5px;
+}
