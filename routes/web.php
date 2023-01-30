@@ -48,8 +48,14 @@ Route::controller(AuthController::class)->group(function(){
         Route::post('/register', 'setRegister');
         Route::get('/login', 'getLogin')->name('login');
         Route::post('/login', 'setLogin');
+        Route::view('/forget-password', 'auth.forget-password')->name('forgetPassword');
 
     });
+        Route::middleware(['isAdmin:2'])->group(function(){
+            Route::view('/user/edit-profile', 'user.edit-profile');
+        });
+    Route::view('/user/profile', 'user.profile')->name('profile');
+    
     Route::post('/logout', 'setLogout')->name('logout')->middleware('auth');
 
 });
