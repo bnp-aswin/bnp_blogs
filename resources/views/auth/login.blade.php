@@ -9,7 +9,9 @@
                     @csrf
                     <x-form.input name="email" type="email" />
                     <x-form.input name="password" type="password"/>
+                    <a href="{{route('forgetPassword')}}" class="btn-forget-password">Forget Password?</a>
                     <x-form.button>Login</x-form.button>
+
                 </form>
             </div>
         </div>
