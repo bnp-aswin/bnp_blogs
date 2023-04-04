@@ -48,7 +48,12 @@ Route::controller(AuthController::class)->group(function(){
         Route::post('/register', 'setRegister');
         Route::get('/login', 'getLogin')->name('login');
         Route::post('/login', 'setLogin');
-        Route::view('/forget-password', 'auth.forget-password')->name('forgetPassword');
+        Route::view('/forget-password', 'auth.forget-password')->name('getForgetPassword');
+        Route::post('/forget-password', 'postForgetPassword')->name('postForgetPassword');
+        Route::view('/forget-password/verify-code', 'auth.verify-code')->name('verifyCode');
+        Route::post('/forget-password/verify-code', 'postVerifyCode')->name('postVerifyCode');
+        Route::view('/forget-password/update-password', 'auth.update-new-password')->name('getUpdateNewPassword');
+        Route::post('/forget-password/update-password', 'postUpdateNewPassword')->name('postUpdateNewPassword');
 
     });
         Route::middleware(['isAdmin:2'])->group(function(){

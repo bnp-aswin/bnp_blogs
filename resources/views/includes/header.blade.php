@@ -69,7 +69,7 @@
                                     </div>
                                 </li>
                                 @auth
-                                    <li>Welcome {{auth()->user()->username}}</li>
+                                    <li>Welcome <a href="{{route('profile')}}">{{auth()->user()->name}}</a></li>
                                 @endauth
                                 {{-- <li><a href="#" class="d-none d-lg-block"> <i class="fa-brands fa-twitter"></i></a></li>
                                 <li><a href="#" class="d-none d-lg-block"><i class="fa-brands fa-instagram"></i></a></li>
