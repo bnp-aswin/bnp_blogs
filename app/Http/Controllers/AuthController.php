@@ -67,4 +67,49 @@ class AuthController extends Controller
         return redirect()->route('home')->with('status', 'Logout Successfull')->with('type', 'success');
     }
 
+    public function postForgetPassword(Request $request)
+    {
+        $data = $request->validate([
+            'email' => ['bail', 'required', Rule::exists('users', 'email')]
+        ]);
+        $user = User::where('email', $data['email']);
+        // dd($user);
+        // $randomCode = 
+        $user->update([
+            'email_verification_code' => random_int(100000,999999)
+        ]);
+        session(['requestedUser' => $data['email']]);
+        return redirect()->route('verifyCode')->with('status', 'Verification mail has been send to ' . session()->get('requestedUser'))->with('type', 'success');
+
+    }
+
+    public function postVerifyCode(Request $request)
+    {
+        $data = $request->validate([
+            'verificationCode' => ['required']
+        ]);
+        $requestedUser = session()->get('requestedUser');
+        $currentUser = User::where('email', $requestedUser)->first();
+        // dd($currentUser['email_verification_code']);
+        if($data['verificationCode'] == $currentUser['email_verification_code']){
+            return redirect()->route('getUpdateNewPassword');
+        }else{
+            return redirect()->back()->with('status', 'Invalid verification code.. Please enter the valid code')->with('type', 'danger');
+        }
+    }
+
+    public function postUpdateNewPassword(Request $request)
+    {
+        $data = $request->validate([
+            'password' => ['bail', 'required', 'confirmed', 'min:6', 'max:10'],
+        ]);
+        $requestedUser = session()->get('requestedUser');
+        $currentUser = User::where('email', $requestedUser)->first();
+        $currentUser->update([
+            'password' => $data['password'],
+            'email_verification_code' => null
+        ]);
+        return redirect()->route('login')->with('status', 'Password changed successfully.. Kindly login with new Password')->with('type', 'success');
+    }
+
 }
